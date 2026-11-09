@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galisphere</title>
     <!-- Google Fonts za sci-fi izgled -->
+    <link href="favicon.jpg" rel="icon" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- MathJax za lepo prikazivanje formula -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root {
             --bg-color: #05050a;
@@ -260,7 +266,7 @@
             <div class="project-desc" data-key="card2_desc">
                 Mini-igrica lansiranja svemirske sonde sa kalkulacijom gravitacionih sila ($F = G \frac{m_1 m_2}{r^2}$) u realnom vremenu i prolaskom kroz asteroide.
             </div>
-            <a href="#" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+            <a href="gravitational-slingshot/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
         </div>
 
         <!-- KARTICA 3 -->
@@ -280,7 +286,7 @@
             <div class="project-desc" data-key="card4_desc">
                 Prevođenje astronomskih podataka u zvuk – svaka planeta svira svoju notu, dok Sunce pokreće ambijentalni techno/space-synth "Remix mode".
             </div>
-            <a href="planet-symphony/planetsymphony.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+            <a href="planet-symphony/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
         </div>
 
     </div>
@@ -290,7 +296,7 @@
     </footer>
 
     <script>
-        // Rečnik sa prevodima
+        // Rečnik sa prevodima (korišćenje LaTeX oznaka sa razlomkom)
         const translations = {
             sr: {
                 langButton: "ENGLISH",
@@ -299,7 +305,7 @@
                 card1_title: "3D Sunčev sistem",
                 card1_desc: "Interaktivni 3D model Sunčevog sistema sa realnim efemeridama planeta i suludim \"Time Warp\" režimom ubrzanja vremena za milion puta.",
                 card2_title: "Gravitaciona Praćka",
-                card2_desc: "Mini-igrica lansiranja svemirske sonde sa kalkulacijom gravitacionih sila (F = G(m1*m2)/r²) u realnom vremenu i prolaskom kroz asteroide.",
+                card2_desc: "Mini-igrica lansiranja svemirske sonde sa kalkulacijom gravitacionih sila ($F = G \\frac{m_1 m_2}{r^2}$) u realnom vremenu i prolaskom kroz asteroide.",
                 card3_title: "Alien Weather Report",
                 card3_desc: "Generator satiričnih vanzemaljskih vremenskih izveštaja sa usijanih i ledenih planeta Sunčevog sistema propraćen glasom robotskog voditelja.",
                 card4_title: "Symphony of the Spheres",
@@ -314,8 +320,9 @@
                 card1_title: "3D Solar System",
                 card1_desc: "Interactive 3D model of the Solar System featuring realistic planetary ephemerides and an insane 'Time Warp' mode for million-fold time acceleration.",
                 card2_title: "Gravitational Slingshot",
-                card2_desc: "A mini-game launching a space probe with real-time gravitational force calculation (F = G(m1*m2)/r²) and asteroid navigation.",
+                card2_desc: "A mini-game launching a space probe with real-time gravitational force calculation ($F = G \\frac{m_1 m_2}{r^2}$) and asteroid navigation.",
                 card3_title: "Alien Weather Report",
+                card3_title_desc: "A satirical alien weather report generator for scorching and freezing planets in the Solar System, accompanied by a robotic host's voice.",
                 card3_desc: "A satirical alien weather report generator for scorching and freezing planets in the Solar System, accompanied by a robotic host's voice.",
                 card4_title: "Symphony of the Spheres",
                 card4_desc: "Translating astronomical data into sound – each planet plays its own note, while the Sun drives an ambient techno/space-synth 'Remix mode'.",
@@ -343,8 +350,12 @@
 
             // Promeni tekst samog dugmeta
             document.getElementById('langToggle').innerText = translations[currentLang].langButton;
+
+            // Ponovo pokreni MathJax da iscrta formule nakon menjanja jezika
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
         }
     </script>
 
 </body>
-</html>

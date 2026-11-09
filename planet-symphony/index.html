@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony of the Spheres</title>
+    <link href="favicon.jpg" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Jezički prekidač -->
+    <div class="lang-switcher">
+        <button id="langToggle" class="btn-lang" onclick="toggleLanguage()">ENGLISH</button>
+    </div>
+
+    <h1 data-key="main_title">Symphony of the Spheres</h1>
+    <p data-key="main_desc">KLIKNI NA PLANETU ZA TON • KLIKNI NA SUNCE ZA REMIX MODE</p>
+
+    <div class="canvas-container">
+        <canvas id="solarSystem" width="480" height="480"></canvas>
+    </div>
+
+    <div class="controls">
+        <button id="startAudioBtn" class="action-btn" data-key="btn_audio">Uključi Audio sistem</button>
+        <button id="remixBtn" class="action-btn" data-key="btn_remix">Remix Mode: OFF</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
