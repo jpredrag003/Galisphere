@@ -90,7 +90,7 @@ function setStatus(type, param = null) {
     else if (type === 'l1') statusText.innerText = t.statusLevel1;
     else if (type === 'l2') statusText.innerText = t.statusLevel2;
     else if (type === 'l3') statusText.innerText = t.statusLevel3;
-    else if (type === 'crash') statusText.innerText = t.crash(translations[currentLang][param]);
+    else if (type === 'crash') statusText.innerText = t.crash(t[param]);
     else if (type === 'asteroidCrash') statusText.innerText = t.asteroidCrash;
     else if (type === 'success') statusText.innerText = t.success(param);
     else if (type === 'win') statusText.innerText = t.win;
@@ -413,7 +413,6 @@ function draw() {
 
     if (isAiming) {
         ctx.strokeStyle = '#00f3ff';
-        ctx.lineWidth =.3;
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(earth.x, earth.y);
