@@ -110,10 +110,16 @@ function playTone(freq, type = 'sine') {
     osc.stop(audioCtx.currentTime + 1.2);
 }
 
+// Ispravljen event listener sa skaliranjem za mobilne uređaje
 canvas.addEventListener('click', (event) => {
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left - centerX;
-    const y = event.clientY - rect.top - centerY;
+    
+    // Računanje skale između stvarne veličine platna (480) i prikazane veličine na ekranu
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const x = (event.clientX - rect.left) * scaleX - centerX;
+    const y = (event.clientY - rect.top) * scaleY - centerY;
     const distanceToCenter = Math.sqrt(x * x + y * y);
 
     if (distanceToCenter < 25) {
@@ -129,7 +135,7 @@ canvas.addEventListener('click', (event) => {
         const py = Math.sin(planet.angle) * planet.distance;
         const distToPlanet = Math.sqrt((x - px) ** 2 + (y - py) ** 2);
 
-        if (distToPlanet < planet.radius + 10) {
+        if (distToPlanet < planet.radius + 12) { // Blago povećana tolerancija za lakši klik na mobilnom
             playTone(planet.freq, 'sine');
             planet.pulse = 15;
         }

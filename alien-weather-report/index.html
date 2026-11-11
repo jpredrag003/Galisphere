@@ -1,61 +1,65 @@
 <!doctype html>
 <html lang="sr">
 <head>
-<meta charset="UTF-8">
-<meta content="width=device-width,initial-scale=1" name="viewport">
-<title>Alien Weather Report</title>
-<link href="favicon.jpg" rel="icon" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alien Weather Report</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-<script src="script.js" defer></script>
-<div class="container">
-  <div class="top-bar">
-    <div class="planet p1" id="p-merkur" onclick='promeniInterfejs("merkur")' title="Merkur"></div>
-    <div class="planet p2" id="p-venera" onclick='promeniInterfejs("venera")' title="Venera"></div>
-    <div class="planet p3" id="p-zemlja" onclick='promeniInterfejs("zemlja")' title="Zemlja"></div>
-    <div class="planet p4" id="p-mars" onclick='promeniInterfejs("mars")' title="Mars"></div>
-    <div class="planet p5" id="p-jupiter" onclick='promeniInterfejs("jupiter")' title="Jupiter"></div>
-    <div class="planet p6" id="p-saturn" onclick='promeniInterfejs("saturn")' title="Saturn"></div>
-    <div class="planet p7" id="p-uran" onclick='promeniInterfejs("uran")' title="Uran"></div>
-    <div class="planet p8" id="p-neptun" onclick='promeniInterfejs("neptun")' title="Neptun"></div>
-    
-    <!-- Dugme je sada unutra, savršeno uklopljeno sa desne strane -->
-    <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🌐 EN</button>
-  </div>
+  <div class="container">
+    <div class="top-bar">
+      <div class="planet p1" id="p-merkur" onclick="promeniInterfejs('merkur')" title="Merkur"></div>
+      <div class="planet p2" id="p-venera" onclick="promeniInterfejs('venera')" title="Venera"></div>
+      <div class="planet p3" id="p-zemlja" onclick="promeniInterfejs('zemlja')" title="Zemlja"></div>
+      <div class="planet p4" id="p-mars" onclick="promeniInterfejs('mars')" title="Mars"></div>
+      <div class="planet p5" id="p-jupiter" onclick="promeniInterfejs('jupiter')" title="Jupiter"></div>
+      <div class="planet p6" id="p-saturn" onclick="promeniInterfejs('saturn')" title="Saturn"></div>
+      <div class="planet p7" id="p-uran" onclick="promeniInterfejs('uran')" title="Uran"></div>
+      <div class="planet p8" id="p-neptun" onclick="promeniInterfejs('neptun')" title="Neptun"></div>
+      
+      <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🌐 EN</button>
+    </div>
 
-  <div class="main-box" id="glavni-prozor">
-    <div class="izvestaj-default" id="default-view">
-      <span style="font-size:26px;margin-bottom:10px" id="d-title">👽 DOBRODOŠLI NA INTERGALAKTIČKI RADAR! 📡</span> 
-      <span style="font-size:15px;opacity:.9" id="d-subtitle">Izaberi planetu iznad da vidiš da li ti danas treba skafander, krema za sunčanje ili tvoj brod za spašavanje.</span> 
-      <span style="font-size:13px;margin-top:15px;color:var(--border-color);animation:pulse 1.5s infinite" id="d-footer">👇 Klikni na bilo koju lopticu gore i rizikuj život 👇</span>
-    </div>
-    <div class="weather-content" id="weather-view">
-      <div class="card-header">
-        <h2 id="w-name">--</h2>
-        <span class="badge" id="w-temp">-- °C</span>
+    <div class="main-box" id="glavni-prozor">
+      <div class="izvestaj-default" id="default-view">
+        <span style="font-size:26px;margin-bottom:10px" id="d-title">👽 DOBRODOŠLI NA INTERGALAKTIČKI RADAR! 📡</span>
+        <span style="font-size:15px;opacity:.9" id="d-subtitle">Izaberi planetu iznad da vidiš da li ti danas treba skafander, krema za sunčanje ili tvoj brod za spašavanje.</span>
+        <span style="font-size:13px;margin-top:15px;color:var(--border-color);animation:pulse 1.5s infinite" id="d-footer">👇 Klikni na bilo koju lopticu gore i rizikuj život 👇</span>
       </div>
-      <div class="stat-grid">
-        <div class="stat-item">
-          <span class="label" id="lbl-atmosphere">Atmosfera</span> 
-          <span class="value" id="w-atmosphere">--</span>
+      
+      <div class="weather-content" id="weather-view">
+        <div class="card-header">
+          <h2 id="w-name">--</h2>
+          <span class="badge" id="w-temp">-- °C</span>
         </div>
-        <div class="stat-item">
-          <span class="label" id="lbl-wind">Brzina vetra</span> 
-          <span class="value" id="w-wind">--</span>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <span class="label" id="lbl-atmosphere">Atmosfera</span>
+            <span class="value" id="w-atmosphere">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="label" id="lbl-wind">Brzina vetra</span>
+            <span class="value" id="w-wind">--</span>
+          </div>
         </div>
-      </div>
-      <div class="report-box">
-        <h3 id="lbl-news">📢 Vesti sa terena:</h3>
-        <p id="w-report">--</p>
-      </div>
-      <div class="audio-controls">
-        <button class="btn-audio" id="speakBtn" onclick="speakReport()">🔊 Pokreni glas voditelja</button>
-        <button class="btn-audio btn-stop" id="stopBtn" onclick="stopSpeech()">⏹ Zaustavi</button>
+        <div class="report-box">
+          <h3 id="lbl-news">📢 Vesti sa terena:</h3>
+          <p id="w-report">--</p>
+        </div>
+        
+        <!-- Dodato dugme za generisanje nove lude vesti -->
+        <button class="btn-audio" style="margin-bottom: 8px;" onclick="osveziVesti()" id="btn-random">🎲 Nova luda vest</button>
+
+        <div class="audio-controls">
+          <button class="btn-audio" id="speakBtn" onclick="speakReport()">🔊 Pokreni glas voditelja</button>
+          <button class="btn-audio btn-stop" id="stopBtn" onclick="stopSpeech()">⏹ Zaustavi</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </body>
 </html>

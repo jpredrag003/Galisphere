@@ -1,14 +1,50 @@
+<!DOCTYPE html>
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galisphere</title>
-    <!-- Google Fonts za sci-fi izgled -->
-    <link href="favicon.jpg" rel="icon" type="image/x-icon">
+    <title>Galisphere - Space Systems, Simulations & AI</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Galisphere - Pregled svemirskih sistema, simulacija i AI modula / Overview of space systems, simulations, and AI modules.">
+    <meta name="keywords" content="space systems, 3d solar system, gravitational slingshot, astronomy simulation, space command labs">
+    <meta name="author" content="Space Command Labs">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Galisphere - Space Systems & Simulations">
+    <meta property="og:description" content="Pregled svemirskih sistema, simulacija i AI modula.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://galisphere.space">
+    <meta property="og:image" content="https://galisphere.space/og-banner.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Favicon -->
+    <link href="favicon.png" rel="icon" type="image/png">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
-    <!-- MathJax za lepo prikazivanje formula -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- Language Initialization Script (FOUC Prevention) -->
+    <script>
+        (function() {
+            const savedLang = localStorage.getItem('galisphere_lang');
+            const browserLang = navigator.language || navigator.userLanguage;
+            const initialLang = savedLang || (browserLang && browserLang.startsWith('en') ? 'en' : 'sr');
+            document.documentElement.lang = initialLang;
+            window.currentLang = initialLang;
+        })();
+    </script>
+
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
@@ -37,7 +73,13 @@
             min-height: 100vh;
         }
 
-        /* Pozadinske zvezde animacija */
+        /* Fokus stilovi za pristupačnost (Accessibility) */
+        a:focus-visible, button:focus-visible {
+            outline: 2px dashed var(--neon-cyan);
+            outline-offset: 4px;
+        }
+
+        /* Animirana pozadina sa zvezdama */
         .stars {
             position: fixed;
             top: 0;
@@ -45,10 +87,11 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            background: transparent url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat;
+            background: transparent url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><circle cx='30' cy='45' r='1' fill='%23ffffff' opacity='0.8'/><circle cx='180' cy='90' r='1.5' fill='%2300f0ff' opacity='0.7'/><circle cx='90' cy='210' r='1' fill='%23ffffff' opacity='0.5'/><circle cx='250' cy='260' r='1.2' fill='%23b000ff' opacity='0.6'/><circle cx='140' cy='150' r='0.8' fill='%23ffffff' opacity='0.9'/></svg>") repeat;
             z-index: 0;
-            opacity: 0.5;
-            animation: moveStars 100s linear infinite;
+            opacity: 0.6;
+            animation: moveStars 120s linear infinite;
+            will-change: background-position;
         }
 
         @keyframes moveStars {
@@ -159,7 +202,6 @@
             border-color: var(--neon-pink);
         }
 
-        /* Logotip / Ikona unutar kartice */
         .card-logo {
             width: 90px;
             height: 90px;
@@ -234,11 +276,11 @@
 </head>
 <body>
 
-    <div class="stars"></div>
+    <div class="stars" aria-hidden="true"></div>
 
-    <!-- Dugme za promenu jezika -->
+    <!-- Jezički prekidač -->
     <div class="lang-switcher">
-        <button id="langToggle" class="btn-lang" onclick="toggleLanguage()">ENGLISH</button>
+        <button id="langToggle" class="btn-lang" onclick="toggleLanguage()" aria-label="Promeni jezik sajta">EN</button>
     </div>
 
     <header>
@@ -246,56 +288,48 @@
         <p data-key="header_desc">Pregled svemirskih sistema, simulacija i AI modula</p>
     </header>
 
-    <div class="container">
+    <main class="container">
 
         <!-- KARTICA 1 -->
-        <div class="project-card">
-            <div class="card-logo">🌌</div>
-            <div class="project-title" data-key="card1_title">3D Sunčev sistem</div>
-            <div class="project-desc" data-key="card1_desc">
-                Interaktivni 3D model Sunčevog sistema sa realnim efemeridama planeta i suludim "Time Warp" režimom ubrzanja vremena za milion puta.
-            </div>
-            <a href="#" class="btn-sci" data-key="btn_card1">DETALJNIJE</a>
-        </div>
+        <article class="project-card">
+            <div class="card-logo" aria-hidden="true">🌌</div>
+            <h2 class="project-title" data-key="card1_title">3D Sunčev sistem</h2>
+            <div class="project-desc" data-key="card1_desc">Interaktivni 3D model Sunčevog sistema sa realnim efemeridama planeta i suludim "Time Warp" režimom ubrzanja vremena za milion puta.</div>
+            <a href="solar-system/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+        </article>
 
         <!-- KARTICA 2 -->
-        <div class="project-card">
-            <div class="card-logo">🚀</div>
-            <div class="project-title" data-key="card2_title">Gravitaciona Praćka</div>
-            <div class="project-desc" data-key="card2_desc">
-                Mini-igrica lansiranja svemirske sonde sa kalkulacijom gravitacionih sila ($F = G \frac{m_1 m_2}{r^2}$) u realnom vremenu i prolaskom kroz asteroide.
-            </div>
-            <a href="gravitational-slingshot/index.html" class="btn-sci" data-key="btn_card2">DETALJNIJE</a>
-        </div>
+        <article class="project-card">
+            <div class="card-logo" aria-hidden="true">🚀</div>
+            <h2 class="project-title" data-key="card2_title">Gravitaciona Praćka</h2>
+            <div class="project-desc" data-key="card2_desc">Mini-igrica lansiranja svemirske sonde sa kalkulacijom gravitacionih sila ($F = G \frac{m_1 m_2}{r^2}$) u realnom vremenu i prolaskom kroz asteroide.</div>
+            <a href="gravitational-slingshot/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+        </article>
 
         <!-- KARTICA 3 -->
-        <div class="project-card">
-            <div class="card-logo">👽</div>
-            <div class="project-title" data-key="card3_title">Alien Weather Report</div>
-            <div class="project-desc" data-key="card3_desc">
-                Generator satiričnih vanzemaljskih vremenskih izveštaja sa usijanih i ledenih planeta Sunčevog sistema propraćen glasom robotskog voditelja.
-            </div>
-            <a href="alien-weather-report/alien-weather.html" class="btn-sci" data-key="btn_card3">DETALJNIJE</a>
-        </div>
+        <article class="project-card">
+            <div class="card-logo" aria-hidden="true">👽</div>
+            <h2 class="project-title" data-key="card3_title">Alien Weather Report</h2>
+            <div class="project-desc" data-key="card3_desc">Generator satiričnih vanzemaljskih vremenskih izveštaja sa usijanih i ledenih planeta Sunčevog sistema propraćen glasom robotskog voditelja.</div>
+            <a href="alien-weather-report/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+        </article>
 
         <!-- KARTICA 4 -->
-        <div class="project-card">
-            <div class="card-logo">🎵</div>
-            <div class="project-title" data-key="card4_title">Symphony of the Spheres</div>
-            <div class="project-desc" data-key="card4_desc">
-                Prevođenje astronomskih podataka u zvuk – svaka planeta svira svoju notu, dok Sunce pokreće ambijentalni techno/space-synth "Remix mode".
-            </div>
-            <a href="planet-symphony/index.html" class="btn-sci" data-key="btn_card4">DETALJNIJE</a>
-        </div>
+        <article class="project-card">
+            <div class="card-logo" aria-hidden="true">🎵</div>
+            <h2 class="project-title" data-key="card4_title">Symphony of the Spheres</h2>
+            <div class="project-desc" data-key="card4_desc">Prevođenje astronomskih podataka u zvuk – svaka planeta svira svoju notu, dok Sunce pokreće ambijentalni techno/space-synth "Remix mode".</div>
+            <a href="planet-symphony/index.html" class="btn-sci" data-key="btn_details">DETALJNIJE</a>
+        </article>
 
-    </div>
+    </main>
 
     <footer>
-        <span data-key="footer_text">&copy; 2026 SPACE COMMAND LABS. Sva prava zadržana.</span>
+        <p data-key="footer_text">&copy; 2026 SPACE COMMAND LABS. Sva prava zadržana.</p>
     </footer>
 
     <script>
-        // Rečnik sa prevodima (korišćenje LaTeX oznaka sa razlomkom)
+        // Centralizovani rečnik sa svim tekstovima
         const translations = {
             sr: {
                 langButton: "ENGLISH",
@@ -309,10 +343,7 @@
                 card3_desc: "Generator satiričnih vanzemaljskih vremenskih izveštaja sa usijanih i ledenih planeta Sunčevog sistema propraćen glasom robotskog voditelja.",
                 card4_title: "Symphony of the Spheres",
                 card4_desc: "Prevođenje astronomskih podataka u zvuk – svaka planeta svira svoju notu, dok Sunce pokreće ambijentalni techno/space-synth \"Remix mode\".",
-                btn_card1: "DETALJNIJE",
-                btn_card2: "DETALJNIJE",
-                btn_card3: "DETALJNIJE",
-                btn_card4: "DETALJNIJE",
+                btn_details: "DETALJNIJE",
                 footer_text: "&copy; 2026 SPACE COMMAND LABS. Sva prava zadržana."
             },
             en: {
@@ -327,40 +358,52 @@
                 card3_desc: "A satirical alien weather report generator for scorching and freezing planets in the Solar System, accompanied by a robotic host's voice.",
                 card4_title: "Symphony of the Spheres",
                 card4_desc: "Translating astronomical data into sound – each planet plays its own note, while the Sun drives an ambient techno/space-synth 'Remix mode'.",
-                btn_card1: "DETAILS",
-                btn_card2: "DETAILS",
-                btn_card3: "DETAILS",
-                btn_card4: "DETAILS",
+                btn_details: "DETAILS",
                 footer_text: "&copy; 2026 SPACE COMMAND LABS. All rights reserved."
             }
         };
 
-        let currentLang = 'sr';
+        function updateContent() {
+            document.documentElement.lang = window.currentLang;
 
-        function toggleLanguage() {
-            // Promeni aktivni jezik
-            currentLang = currentLang === 'sr' ? 'en' : 'sr';
-            
-            // Postavi lang atribut na html tag-u
-            document.documentElement.lang = currentLang;
-
-            // Pronađi sve elemente sa data-key atributom i promeni im tekst
+            // Popunjavanje svih elemenata sa data-key atributom
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
-                if (translations[currentLang][key]) {
-                    element.innerHTML = translations[currentLang][key];
+                if (translations[window.currentLang] && translations[window.currentLang][key]) {
+                    if (key === 'footer_text') {
+                        element.innerHTML = translations[window.currentLang][key];
+                    } else {
+                        element.textContent = translations[window.currentLang][key];
+                    }
                 }
             });
 
-            // Promeni tekst samog dugmeta
-            document.getElementById('langToggle').innerText = translations[currentLang].langButton;
+            // Ažuriranje teksta na dugmetu za jezik
+            const langToggleBtn = document.getElementById('langToggle');
+            if (langToggleBtn) {
+                langToggleBtn.textContent = translations[window.currentLang].langButton;
+            }
 
-            // Ponovo pokreni MathJax da iscrta formule nakon menjanja jezika
+            // Bezbedno osvežavanje MathJax formula nakon promene jezika
             if (window.MathJax) {
-                MathJax.typeset();
+                setTimeout(() => {
+                    if (typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise().catch((err) => console.warn('MathJax warning:', err));
+                    }
+                }, 50);
             }
         }
-    </script>
 
+        function toggleLanguage() {
+            window.currentLang = window.currentLang === 'sr' ? 'en' : 'sr';
+            localStorage.setItem('galisphere_lang', window.currentLang);
+            updateContent();
+        }
+
+        // Inicijalizacija sadržaja pri učitavanju stranice
+        document.addEventListener('DOMContentLoaded', () => {
+            updateContent();
+        });
+    </script>
 </body>
 </html>

@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gravitational Slinghshot</title>
-    <link href="favicon.jpg" rel="icon" type="image/x-icon">
+    <title>Gravitational Slingshot</title>
+    <link href="favicon.png" rel="icon" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-    <button id="lang-btn" class="lang-btn">EN</button>
-    
-    <div id="game-container">
-        <canvas id="spaceCanvas" width="1000" height="650"></canvas>
-        <div id="ui-overlay">
-            <div class="stat" id="level-text">Nivo: 1 / 3</div>
-            <div class="stat" id="status-text">Status: 🛰️ Namesti ugao i lansiraj!</div>
-            <div class="stat" id="speed-text">Brzina: 0.0 km/s</div>
-            <div class="stat" id="fuel-text">Gorivo (Impuls): 🔋 (1)</div>
+    <div class="container">
+        <button id="lang-btn" class="lang-btn" title="Promeni jezik / Change language">EN</button>
+        <div id="game-container">
+            <canvas id="spaceCanvas" width="1000" height="650"></canvas>
+            <div id="ui-overlay">
+                <div class="stat" id="level-text">Nivo: 1 / 3</div>
+                <div class="stat" id="status-text">Status: 🛰️ Namesti ugao i lansiraj!</div>
+                <div class="stat" id="speed-text">Brzina: 0.0 km/s</div>
+                <div class="stat" id="fuel-text">Gorivo (Impuls): 🔋 (1)</div>
+            </div>
+            <div id="controls-hint">Povuci mišem od Svemirske letelice da naciljaš. Klikni tokom leta za impuls motora.</div>
         </div>
-        <div id="controls-hint">Povuci mišem od Zemlje da naciljaš. Klikni tokom leta za impuls motora.</div>
     </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

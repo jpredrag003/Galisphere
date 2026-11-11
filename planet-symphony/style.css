@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400&display=swap');
 
 body {
     margin: 0;
@@ -10,33 +10,39 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Jezički prekidač u gornjem desnom uglu */
+/* Jezički prekidač - prilagođen da se ne sudara sa sadržajem na malim ekranima */
 .lang-switcher {
     position: absolute;
     top: 20px;
-    right: 30px;
+    right: 20px;
     z-index: 20;
 }
 
-.btn-lang {
+/* Zajednički stilovi za dugmiće */
+.btn-lang, button.action-btn {
     background: transparent;
     color: #8be9fd;
     border: 1px solid #8be9fd;
-    padding: 6px 14px;
     font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    font-size: 0.7rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-lang {
+    padding: 6px 14px;
+    font-size: 0.7rem;
     border-radius: 12px;
-    transition: all 0.2s ease;
     box-shadow: 0 0 10px rgba(139, 233, 253, 0.2);
 }
 
-.btn-lang:hover {
+.btn-lang:hover, button.action-btn:hover {
     background: #8be9fd;
     color: #020205;
     box-shadow: 0 0 15px rgba(139, 233, 253, 0.6);
@@ -50,18 +56,21 @@ h1 {
     text-transform: uppercase;
     color: #8be9fd;
     text-shadow: 0 0 10px rgba(139, 233, 253, 0.4);
+    text-align: center;
 }
 
 p {
     font-size: 0.75rem;
     color: #a0a0c0;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .canvas-container {
     position: relative;
-    width: 480px;
+    width: 100%;
+    max-width: 480px;
     height: 480px;
     display: flex;
     align-items: center;
@@ -70,15 +79,18 @@ p {
     border-radius: 50%;
     box-shadow: 0 0 40px rgba(139, 233, 253, 0.1);
     border: 1px solid rgba(139, 233, 253, 0.15);
+    flex-shrink: 0;
 }
 
 canvas {
     cursor: pointer;
     border-radius: 50%;
+    max-width: 100%;
+    height: auto;
 }
 
 .controls {
-    margin-top: 12px;
+    margin-top: 15px;
     display: flex;
     gap: 10px;
     background: rgba(15, 15, 25, 0.8);
@@ -86,24 +98,31 @@ canvas {
     border-radius: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 button.action-btn {
-    background: transparent;
-    color: #8be9fd;
-    border: 1px solid #8be9fd;
     padding: 8px 16px;
     border-radius: 15px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
     font-size: 0.7rem;
     letter-spacing: 1px;
-    font-weight: 600;
-    transition: all 0.3s ease;
 }
 
-button.action-btn:hover {
-    background: #8be9fd;
-    color: #020205;
-    box-shadow: 0 0 15px rgba(139, 233, 253, 0.6);
+/* Medija upit za manje telefone (ispod 480px širine) */
+@media (max-width: 480px) {
+    .canvas-container {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .lang-switcher {
+        top: 10px;
+        right: 10px;
+    }
+    
+    h1 {
+        font-size: 1rem;
+        padding: 0 40px; /* Da tekst ne ide ispod dugmeta za jezik */
+    }
 }
