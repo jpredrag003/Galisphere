@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='sg' cx='38%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='42%25' stop-color='%23facc15'/%3E%3Cstop offset='100%25' stop-color='%23ea580c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='16' fill='url(%23sg)'/%3E%3Cg stroke='%23facc15' stroke-width='3.5' stroke-linecap='round'%3E%3Cline x1='32' y1='4' x2='32' y2='11'/%3E%3Cline x1='32' y1='53' x2='32' y2='60'/%3E%3Cline x1='4' y1='32' x2='11' y2='32'/%3E%3Cline x1='53' y1='32' x2='60' y2='32'/%3E%3Cline x1='12.2' y1='12.2' x2='17.2' y2='17.2'/%3E%3Cline x1='46.8' y1='46.8' x2='51.8' y2='51.8'/%3E%3Cline x1='51.8' y1='12.2' x2='46.8' y2='17.2'/%3E%3Cline x1='17.2' y1='46.8' x2='12.2' y2='51.8'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css">
+  <title>Sunčev sistem</title>
+  
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+      <div class="title-group">
+        <h1 id="uiTitle">Sunčev sistem</h1>
+        <p id="uiSubtitle"></p>
+      </div>
+      <div class="header-quick">
+        <button id="quickPlayBtn" class="active">Pauza</button>
+        <button id="langBtn" class="lang-btn" title="Switch language / Promeni jezik">EN</button>
+        <button id="menuToggleBtn" class="menu-toggle-btn" aria-expanded="false">☰ Kontrole</button>
+      </div>
+    </div>
+
+    <div class="controls-wrap" id="controlsWrap">
+      <!-- Grupa 1: Vreme i skala -->
+      <div class="ctrl-group">
+        <button id="togglePlayBtn">Pauza</button>
+        <label class="field-chip">
+          <span id="uiSpeedLabel">Brzina:</span>
+          <input id="speedRange" type="range" min="0.1" max="10" step="0.1" value="2" />
+          <span id="speedValue" class="speed-val">2.0x</span>
+        </label>
+        <label class="field-chip">
+          <span id="uiScaleLabel">Skala:</span>
+          <select id="scaleMode">
+            <option id="optVisual" value="visual">Vizuelna (pregledna)</option>
+            <option id="optAu" value="au">Proporcionalna AJ</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Grupa 2: Slojevi prikaza -->
+      <div class="ctrl-group">
+        <button id="toggleOrbitsBtn" class="active">Orbite: UKLJ</button>
+        <button id="toggleTrailsBtn" class="active">Tragovi: UKLJ</button>
+        <button id="toggleLabelsBtn" class="active">Oznake: UKLJ</button>
+        <button id="toggleBeltBtn" class="active">Asteroidi: UKLJ</button>
+        <button id="toggleCometBtn" class="active">Kometa: UKLJ</button>
+      </div>
+
+      <!-- Grupa 3: Fokus i kartica -->
+      <div class="ctrl-group">
+        <label class="field-chip">
+          <span id="uiFocusSelectLabel">Planeta:</span>
+          <select id="planetSelect"></select>
+        </label>
+        <button id="toggleFollowBtn">Fokus: ISKLJ</button>
+        <button id="toggleInfoBtn" class="active">Kartica: UKLJ</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-area">
+    <canvas id="solarCanvas"></canvas>
+
+    <!-- Gornji levi HUD: Zumiranje + Legenda -->
+    <div class="top-left-stack">
+      <div class="hud-box">
+        <button id="zoomInBtn" title="Zoom in">+</button>
+        <button id="zoomOutBtn" title="Zoom out">−</button>
+        <span id="zoomLabel" class="zoom-readout">100%</span>
+        <button id="resetViewBtn">Reset</button>
+      </div>
+      <div class="hud-box legend-list" id="legendBox">
+        <div class="legend-item"><span class="lg-dot" style="background:#facc15;"></span><span id="lgSun">Sunce</span></div>
+        <div class="legend-item"><span class="lg-dot" style="background:#38bdf8;"></span><span id="lgPlanets">Planete (8)</span></div>
+        <div class="legend-item"><span class="lg-dot" style="background:#94a3b8;"></span><span id="lgBelt">Glavni pojas asteroida</span></div>
+        <div class="legend-item"><span class="lg-line" style="background:#bae6fd;"></span><span id="lgComet">Kometa</span></div>
+      </div>
+    </div>
+
+    <!-- Donji levi HUD: Vreme simulacije -->
+    <div class="hud-box bottom-left-clock">
+      <span id="uiClockPrefix">Proteklo vreme:</span>
+      <strong id="elapsedDays">0.0</strong>
+      <span id="uiDaysUnit">zemaljskih dana</span>
+      (<strong id="elapsedYears">0.00</strong> <span id="uiYearsUnit">god.</span>)
+    </div>
+
+    <!-- Donja desna kartica: Podaci o izabranoj planeti -->
+    <aside class="info-card" id="infoCard">
+      <div class="info-top">
+        <h2 id="planetHeading"><span class="dot" id="planetDot"></span><span id="planetName">Zemlja</span></h2>
+        <button id="closeCardBtn" class="close-card-btn" title="Hide card">✕</button>
+      </div>
+      <div class="info-type" id="planetType">Terestrička planeta</div>
+      <div class="info-desc" id="planetDesc">Treća planeta od Sunca i jedina poznata planeta sa tečnom vodom na površini i životom.</div>
+      <div class="stat-row"><span class="stat-label" id="uiLabelAu">Velika poluosa:</span><span id="planetAu">1.000 AJ</span></div>
+      <div class="stat-row"><span class="stat-label" id="uiLabelDist">Trenutna distanca:</span><span id="planetDist">1.000 AJ</span></div>
+      <div class="stat-row"><span class="stat-label" id="uiLabelDiameter">Prečnik:</span><span id="planetDiameter">12,742 km</span></div>
+      <div class="stat-row"><span class="stat-label" id="uiLabelPeriod">Orbitalni period:</span><span id="planetPeriod">365.26 dana</span></div>
+      <div class="stat-row"><span class="stat-label" id="uiLabelEcc">Ekscentricitet:</span><span id="planetEcc">0.0167</span></div>
+    </aside>
+  </div>
+
+  <script src="script.js"> </script>
+</body>
+</html>
